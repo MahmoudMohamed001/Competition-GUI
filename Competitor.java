@@ -7,20 +7,18 @@ abstract class Competitor extends Name { // abstract Class competitor inherit cl
     private static int IDcounter = 0; // Class Variable not For specific object
     private int IDnumber;
     private String Email;
-    private String Password;
     private String Country;
     private int Age;
     private String Level;
     private String Gender;
 
     // Constructor For initializing object
-    Competitor(String Email, String Password, String Country, int Age, String F_name, String L_name,
+    Competitor(String Email , String Country, int Age, String F_name, String L_name,
             String Level, String Gender) {
 
         super(F_name, L_name); // initializing constructor of the super class (Name)
         this.IDnumber = IDcounter; // to set the id of user automatically
         this.Email = Email;
-        this.Password = Password;
         this.Country = Country;
         this.Age = Age;
         this.Level = Level;
@@ -45,9 +43,6 @@ abstract class Competitor extends Name { // abstract Class competitor inherit cl
         Email = email;
     }
 
-    public void setPassword(String password) {
-        Password = password;
-    }
 
     public String getCountry() {
         return Country;
@@ -99,7 +94,7 @@ class Competitorview {
     }
 
     // Returning short Details of the competitor
-    public String getShortDetails(String F_name, String L_name, int IDnumber, float OverAllScore) {
+    public String getShortDetails(String F_name, String L_name, int IDnumber, double OverAllScore) {
         return "CN " + IDnumber + " (" + F_name.charAt(0) + L_name.charAt(0) + ")" + " has overall score "
                 + OverAllScore;
     }
@@ -123,10 +118,6 @@ class CompetitorController {
         return Model.getIDnumber();
     }
 
-    public void setIDnumber(int iDnumber) {
-        Model.setIDnumber(iDnumber);
-    }
-
     public String getEmail() {
         return Model.getEmail();
     }
@@ -135,9 +126,6 @@ class CompetitorController {
         Model.setEmail(email);
     }
 
-    public void setPassword(String password) {
-        Model.setPassword(password);
-    }
 
     public String getCountry() {
         return Model.getCountry();
@@ -187,17 +175,20 @@ class CompetitorController {
         Model.setSecondName(SecondName);
     }
 
+    public double getOverAllScore() {
+        return Model.getOverAllScore();
+    }
+
     // Printing Full details of competitor
-    public void FullView() {
-        View.getFullDetails(getIDnumber(), getEmail(), getCountry(), getAge(), getFirstName(),
+    public String FullView() {
+        return View.getFullDetails(getIDnumber(), getEmail(), getCountry(), getAge(), getFirstName(),
                 getSecondName(), getLevel(), getGender(), 0);
 
     }
 
     // Printing short details of competitor
-    public void ShortView() {
-        View.getShortDetails(getEmail(), getCountry(), getIDnumber(), getAge());
+    public String ShortView() {
+        return View.getShortDetails(getFirstName(), getSecondName(), getIDnumber(), getOverAllScore());
     }
-   
-}
 
+}

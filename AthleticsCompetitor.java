@@ -5,11 +5,11 @@ public class AthleticsCompetitor extends Competitor{
     private double[] Scores = new double[6];
     private String Gametype;
 
-    AthleticsCompetitor(String Email, String Password, String Country, int Age, String F_name, String L_name,
+    AthleticsCompetitor(String Email,String Country, int Age, String F_name, String L_name,
             String Level, String Gender, double[] Scores) {
 
         // Calling the Constructor of the Superclass (Competitor)
-        super(Email, Password, Country, Age, F_name, L_name, Level, Gender);
+        super(Email,Country, Age, F_name, L_name, Level, Gender);
         this.Scores = Scores;
         this.Gametype = "Athletics";
     }
@@ -47,7 +47,7 @@ public class AthleticsCompetitor extends Competitor{
    // to print the competitor details
     public static void main(String[] args) {
     double [] Scores = {2,1,3,6,4,8};
-    AthleticsCompetitor S = new AthleticsCompetitor( "Mark@gmail", "5555", "Egypt", 22,
+    AthleticsCompetitor S = new AthleticsCompetitor( "Mark@gmail", "Egypt", 22,
     "Mark", "ELissa", "Beginner", "Male", Scores);
     AthleticsCompetitorView BV = new AthleticsCompetitorView() ;
     AthleticsCompetitorController BC = new AthleticsCompetitorController(S, BV) ;
@@ -59,7 +59,7 @@ public class AthleticsCompetitor extends Competitor{
 
 
      double[] Score = {2,1,3,6,5,9};
-     AthleticsCompetitor S4 = new AthleticsCompetitor( "Mark@gmail", "5555", "Egypt",
+     AthleticsCompetitor S4 = new AthleticsCompetitor( "Mark@gmail", "Egypt",
      22, "Mark", "ELissa", "Beginner", "Male", Score);
      AthleticsCompetitorController BC2 = new AthleticsCompetitorController(S4, BV);
      String result = BC2.FullView();
@@ -78,9 +78,9 @@ class AthleticsCompetitorView extends Competitorview {
     // Returning Full Details of the competitor
     public String getFullDetails(int IDnumber, String Email, String Country, int Age, String F_name, String L_name,
             String Level, String Gender, String ScoreArray, double OverAllScore, String Gametype) {
-        return " Competitor number " + IDnumber + "\n" + "Name : " + F_name + " " + L_name + " is a " + Gender
-                + " and his Game Type : " + Gametype +
-                "\n" + "Email : " + Email + "\n" + "Country : " + Country + "\n" + F_name + " is a " + Level
+        return "Competitor number " + IDnumber + " , " + "Name : " + F_name + " " + L_name + "\n"
+                + F_name + " " + L_name + " is a " + Gender + " and his Game Type : " + Gametype +"\n" 
+                + "Email : " + Email + "\n" + "Country : " + Country + "\n" + F_name + " is a " + Level
                 + " Aged " + Age + " and received scores : " + "[ " + ScoreArray +"]" + " \n" + "Has an OverAllScore : "
                 + OverAllScore;
     }
