@@ -17,9 +17,9 @@ public class CompetitorList {
         
 
     }
-    String csvFile = "C:\\Users\\Rabbit\\OneDrive\\Desktop\\RunCompetitor.csv"; // Saving Location of csv file.
 
-    public void readCompetitorsFromFile() {
+
+    public void readCompetitorsFromFile(String csvFile) {
 
         String line; // reading single line
         BufferedReader Br = null; // reading line by line from the csv file
@@ -31,7 +31,7 @@ public class CompetitorList {
             // Reading line by line until getting null (Lines Finished)
             while ((line = Br.readLine()) != null) {
 
-                String[] data = line.split(","); // Splitting each row into columns
+                String[] data = line.split(","); // Splitting each row into column
 
                 if (data[7].equals("Athletics")) // data[7] is the game type index in the file
                 {
@@ -59,10 +59,7 @@ public class CompetitorList {
                             data[1], data[2], data[8], data[5], Scores);
                     BPlayers.add(Bcompetitor);
                 }
-                // Competitor competitor = new Competitor(data[0], data[1], /* add other fields
-                // as needed */);
-
-                // Players.add(competitor);
+               
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -114,6 +111,7 @@ public class CompetitorList {
 
     }
 
+    // Printing player Frequency Statistics scores how many times 0 and 1 .....
     public String PlayerFrequencyStatistics(String name, double[] scores) {
 
         String result = "";
@@ -129,59 +127,81 @@ public class CompetitorList {
 
     }
 
+    // printing all players full details and summary statistics and Frequency Statistics
     public String[] FinalReport(ArrayList<AthleticsCompetitor> APlayers, ArrayList<BoxingCompetitor> BPlayers) {
 
-        int count = APlayers.size() + BPlayers.size();
-        String[] Results = new String[count];
+        int count ; // calculating counts of players 
+        if(APlayers != null && BPlayers != null) // printing Athletics and boxing players if both are not null 
+        {
+            count = APlayers.size() + BPlayers.size();
+        }
+        else if (APlayers == null)  // if one sport type players = null then it will print the other sport players 
+        {
+            count = BPlayers.size();
+        }
+        else 
+        {
+            count = APlayers.size();  
+        }
+        String[] Results = new String[count]; // each index in results represents one player details 
 
         CompetitorList competitorList = new CompetitorList();
-        competitorList.readCompetitorsFromFile();
+       
 
-        int counter = 0;
-        for (AthleticsCompetitor A : competitorList.APlayers) {
+        int counter = 0; // counter of players for filling each player in the for loop
 
-            Results[counter] = A.getFirstName() + "'s Final Report" + "\n";
-            String Fresults = competitorList.PrintAthleiticPlayerDetails(A);
-            Results[counter] += Fresults + "\n";
+        if(APlayers!=null)  // filling Athletics players full details if not null
+        {
+            for (AthleticsCompetitor A : APlayers) {
 
-            Results[counter] += "Printing " + A.getFirstName() + " Summary Statistics : " + "\n";
-            String PlayerSummaryStatictics = competitorList.PlayerSummaryStatictics(A.getFirstName(), A.getScores());
-            Results[counter] += PlayerSummaryStatictics + "\n";
+                Results[counter] = A.getFirstName() + "'s Final Report" + "\n";
+                String Fresults = competitorList.PrintAthleiticPlayerDetails(A);
+                Results[counter] += Fresults + "\n";
 
-            Results[counter] += "Printing " + A.getFirstName() + " Frequency Statistics : " + "\n";
-            String PlayerFrequencyStatistics = competitorList.PlayerFrequencyStatistics(A.getFirstName(),
-                    A.getScores());
-            Results[counter] += PlayerFrequencyStatistics + "\n";
-            counter++;
+                Results[counter] += "Printing " + A.getFirstName() + " Summary Statistics : " + "\n";
+                String PlayerSummaryStatictics = competitorList.PlayerSummaryStatictics(A.getFirstName(), A.getScores());
+                Results[counter] += PlayerSummaryStatictics + "\n";
 
-        }
+                Results[counter] += "Printing " + A.getFirstName() + " Frequency Statistics : " + "\n";
+                String PlayerFrequencyStatistics = competitorList.PlayerFrequencyStatistics(A.getFirstName(),
+                        A.getScores());
+                Results[counter] += PlayerFrequencyStatistics + "\n";
+                counter++;
 
-        for (BoxingCompetitor B : competitorList.BPlayers) {
+            }
+         }
 
-            Results[counter] = B.getFirstName() + "'s Final Report" + "\n";
-            String Fresults = competitorList.PrintBoxingPlayerDetails(B);
-            Results[counter] += Fresults + "\n";
+        if(BPlayers != null)  // filling Boxing players full details if not null
+        {
+            for (BoxingCompetitor B : BPlayers) {
 
-            Results[counter] += "Printing " + B.getFirstName() + " Summary Statistics : " + "\n";
-            String PlayerSummaryStatictics = competitorList.PlayerSummaryStatictics(B.getFirstName(), B.getScores());
-            Results[counter] += PlayerSummaryStatictics + "\n";
+                Results[counter] = B.getFirstName() + "'s Final Report" + "\n";
+                String Fresults = competitorList.PrintBoxingPlayerDetails(B);
+                Results[counter] += Fresults + "\n";
 
-            Results[counter] += "Printing " + B.getFirstName() + " Frequency Statistics : " + "\n";
-            String PlayerFrequencyStatistics = competitorList.PlayerFrequencyStatistics(B.getFirstName(),
-                    B.getScores());
-            Results[counter] += PlayerFrequencyStatistics + "\n";
-            counter++;
+                Results[counter] += "Printing " + B.getFirstName() + " Summary Statistics : " + "\n";
+                String PlayerSummaryStatictics = competitorList.PlayerSummaryStatictics(B.getFirstName(), B.getScores());
+                Results[counter] += PlayerSummaryStatictics + "\n";
+
+                Results[counter] += "Printing " + B.getFirstName() + " Frequency Statistics : " + "\n";
+                String PlayerFrequencyStatistics = competitorList.PlayerFrequencyStatistics(B.getFirstName(),
+                        B.getScores());
+                Results[counter] += PlayerFrequencyStatistics + "\n";
+                counter++;
+            }
         }
 
         return Results;
 
     }
 
+    // filling text file with players full details 
     public void PrintFinalReport(ArrayList<AthleticsCompetitor> APlayers, ArrayList<BoxingCompetitor> BPlayers) {
-        String FileLocation = "C:\\Users\\Rabbit\\OneDrive\\Desktop\\phase_2\\FinalReport.txt";
+        String AllFileLocation = "FinalReport.txt";
+        
 
-        try {
-            BufferedWriter Writer = new BufferedWriter(new FileWriter(FileLocation));
+        try { 
+            BufferedWriter Writer = new BufferedWriter(new FileWriter(AllFileLocation));
             String[] Results = FinalReport(APlayers, BPlayers);
             for (String playerresult : Results) 
             {
@@ -196,76 +216,61 @@ public class CompetitorList {
 
     }
 
-    public static void main(String[] args) {
-        CompetitorList competitorList = new CompetitorList();
-        competitorList.readCompetitorsFromFile();
-        System.out.println(competitorList.APlayers.get(0).getFirstName());
-        competitorList.PrintFinalReport(competitorList.APlayers, competitorList.BPlayers);
-
-    }
-
-}
-
-class ProduceFinalReport {
-    public String[] FinalReport(ArrayList<AthleticsCompetitor> APlayers, ArrayList<BoxingCompetitor> BPlayers) {
-
-        int count = APlayers.size() + BPlayers.size();
-        String[] Results = new String[count];
-
-        CompetitorList competitorList = new CompetitorList();
-        competitorList.readCompetitorsFromFile();
-
-        int counter = 0;
-        for (AthleticsCompetitor A : competitorList.APlayers) {
-
-            Results[counter] = A.getFirstName() + "'s Final Report" + "\n";
-            String Fresults = competitorList.PrintAthleiticPlayerDetails(A);
-            Results[counter] += Fresults + "\n";
-
-            String PlayerSummaryStatictics = competitorList.PlayerSummaryStatictics(A.getFirstName(), A.getScores());
-            Results[counter] += PlayerSummaryStatictics + "\n";
-
-            String PlayerFrequencyStatistics = competitorList.PlayerFrequencyStatistics(A.getFirstName(),
-                    A.getScores());
-            Results[counter] += PlayerFrequencyStatistics + "\n";
-            counter++;
-
-        }
-
-        for (BoxingCompetitor B : competitorList.BPlayers) {
-
-            Results[counter] = B.getFirstName() + "'s Final Report" + "\n";
-            String Fresults = competitorList.PrintBoxingPlayerDetails(B);
-            Results[counter] += Fresults + "\n";
-
-            String PlayerSummaryStatictics = competitorList.PlayerSummaryStatictics(B.getFirstName(), B.getScores());
-            Results[counter] += PlayerSummaryStatictics + "\n";
-
-            String PlayerFrequencyStatistics = competitorList.PlayerFrequencyStatistics(B.getFirstName(),
-                    B.getScores());
-            Results[counter] += PlayerFrequencyStatistics + "\n";
-            counter++;
-        }
-
-        return Results;
-
-    }
-
-    public void PrintFinalReport(ArrayList<AthleticsCompetitor> APlayers, ArrayList<BoxingCompetitor> BPlayers) {
-        String FileLocation = "C:\\Users\\Rabbit\\OneDrive\\Desktop\\phase_2\\FinalReport.txt";
-
-        try {
-            BufferedWriter Writer = new BufferedWriter(new FileWriter(FileLocation));
-            String[] Results = FinalReport(APlayers, BPlayers);
-            for (String playerresult : Results) {
+    // filling athletics text file with athletics players final report 
+    public void PrintAthleticsFinalReport(ArrayList<AthleticsCompetitor> APlayers)
+    {
+        String AthleticsFinalLocation = "AthleticsFinalReport.txt";
+         try {
+            BufferedWriter Writer = new BufferedWriter(new FileWriter(AthleticsFinalLocation));
+            String[] Results = FinalReport(APlayers, null);
+            for (String playerresult : Results) 
+            {
                 Writer.write(playerresult);
                 Writer.newLine();
             }
-            System.out.println("Data has been written to the file ");
+            Writer.close();
+            System.out.println("Athletics Data has been written to the file ");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+
+    }
+       // filling Boxing text file with athletics players final report 
+     public void PrintBoxingFinalReport(ArrayList<BoxingCompetitor> BPlayers)
+    {
+        String BoxingFinalLocation = "BoxingFinalReport.txt";
+
+         try {
+            BufferedWriter Writer = new BufferedWriter(new FileWriter(BoxingFinalLocation));
+            String[] Results = FinalReport(null , BPlayers);
+            for (String playerresult : Results) 
+            {
+                Writer.write(playerresult);
+                Writer.newLine();
+            }
+            Writer.close();
+            System.out.println("Boxing Data has been written to the file ");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
+    // filling text file of athletics and Boxing competitors
+    public static void main(String[] args) {
+        CompetitorList competitorList = new CompetitorList();
+        String BcsvFile = "Boxing.csv";
+        String AcsvFile = "Athletics.csv";
+        competitorList.readCompetitorsFromFile(AcsvFile);
+        competitorList.readCompetitorsFromFile(BcsvFile);
+        competitorList.PrintAthleticsFinalReport(competitorList.APlayers);
+        competitorList.PrintBoxingFinalReport(competitorList.BPlayers);
+
+    }
+
+    
+
 }
+
