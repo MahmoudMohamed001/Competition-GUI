@@ -90,7 +90,6 @@ class Competitorview {
         return " Competitor number " + IDnumber + "\n" + "Name : " + F_name + " " + L_name + " is " + Gender +
                 "\n" + "Email : " + Email + "\n" + "Country : " + Country + "\n" + F_name + " is a " + Level
                 + " Aged " + Age + "\n" + "Has an OverAllScore : " + OverAllScore;
-
     }
 
     // Returning short Details of the competitor

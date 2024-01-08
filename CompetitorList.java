@@ -14,8 +14,6 @@ public class CompetitorList {
     {
         APlayers = new ArrayList<>();
         BPlayers = new ArrayList<>();
-        
-
     }
 
 
@@ -59,20 +57,15 @@ public class CompetitorList {
                             data[1], data[2], data[8], data[5], Scores);
                     BPlayers.add(Bcompetitor);
                 }
+
                
             }
-        } catch (IOException e) {
+            Br.close();
+        } 
+        catch (IOException e) 
+        {
             e.printStackTrace();
-        } finally {
-            try { // try and catch for any error happening when closing csv file
-
-                if (Br != null) {
-                    Br.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        } 
     }
 
     // this function get Athletics competitor return a string of its full details
@@ -255,6 +248,36 @@ public class CompetitorList {
             e.printStackTrace();
         }
 
+    }
+
+
+    // Searching for Athletic competitor by ID
+    public AthleticsCompetitor SearchForAthleticCompetitor(int ID)
+    {
+        AthleticsCompetitor A = null;
+        for(AthleticsCompetitor AC : APlayers )
+        {
+            if(AC.getIDnumber() == ID )
+            {
+                A = AC;
+            }
+        }
+        return A;
+    }
+
+
+    // Searching For Boxing competitor by ID
+     public BoxingCompetitor SearchForBoxingCompetitor(int ID)
+    {
+        BoxingCompetitor B = null;
+        for(BoxingCompetitor BC : BPlayers )
+        {
+            if(BC.getIDnumber() == ID )
+            {
+                B = BC;
+            }
+        }
+        return B;
 
     }
 
@@ -267,10 +290,7 @@ public class CompetitorList {
         competitorList.readCompetitorsFromFile(BcsvFile);
         competitorList.PrintAthleticsFinalReport(competitorList.APlayers);
         competitorList.PrintBoxingFinalReport(competitorList.BPlayers);
-
     }
-
-    
 
 }
 

@@ -7,7 +7,7 @@ public class BoxingCompetitor extends Competitor {
     private String Gametype;
 
     BoxingCompetitor(String Email, String Country, int Age, String F_name, String L_name,
-            String Level, String Gender, double[] Scores) 
+        String Level, String Gender, double[] Scores) 
     {
 
         // Calling the Constructor of the Superclass (Competitor)
