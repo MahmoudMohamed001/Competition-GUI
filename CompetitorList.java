@@ -8,8 +8,11 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 
 public class CompetitorList {
+
     ArrayList<AthleticsCompetitor> APlayers ;
     ArrayList<BoxingCompetitor> BPlayers ;
+
+    
     CompetitorList()
     {
         APlayers = new ArrayList<>();
@@ -17,7 +20,10 @@ public class CompetitorList {
     }
 
 
-    public void readCompetitorsFromFile(String csvFile) {
+
+
+    public void readCompetitorsFromFile(String csvFile) 
+    {
 
         String line; // reading single line
         BufferedReader Br = null; // reading line by line from the csv file
@@ -27,8 +33,8 @@ public class CompetitorList {
             // Reading the csv file
             Br = new BufferedReader(new FileReader(csvFile));
             // Reading line by line until getting null (Lines Finished)
-            while ((line = Br.readLine()) != null) {
-
+            while ((line = Br.readLine()) != null) 
+            {
                 String[] data = line.split(","); // Splitting each row into column
 
                 if (data[7].equals("Athletics")) // data[7] is the game type index in the file
@@ -37,45 +43,64 @@ public class CompetitorList {
                     // athletics players
                     double[] Scores = new double[6];
                     int count = 0;
-                    for (int i = 9; i <= 14; i++) {
+                    for (int i = 9; i <= 14; i++) 
+                    {
                         Scores[count] = Double.parseDouble(data[i]);
                         count++;
                     }
+                    
                     AthleticsCompetitor Acompatitor = new AthleticsCompetitor(data[3], data[6],
                             Integer.parseInt(data[4]), data[1], data[2], data[8], data[5], Scores);
+                    Acompatitor.setIDnumber(Integer.parseInt(data[0]));
                     APlayers.add(Acompatitor);
-                } else if (data[7].equals("Boxing")) {
+                } 
+
+                else if (data[7].equals("Boxing")) 
+                {
                     // Reading data of one Boxing player then adding it to array of list of Boxing
                     // players
                     double[] Scores = new double[5];
                     int count = 0;
-                    for (int i = 9; i <= 13; i++) {
+                    for (int i = 9; i <= 13; i++) 
+                    {
                         Scores[count] = Double.parseDouble(data[i]);
                         count++;
                     }
                     BoxingCompetitor Bcompetitor = new BoxingCompetitor(data[3], data[6], Integer.parseInt(data[4]),
                             data[1], data[2], data[8], data[5], Scores);
+                    Bcompetitor.setIDnumber(Integer.parseInt(data[0]));
                     BPlayers.add(Bcompetitor);
                 }
-
-               
             }
+
             Br.close();
         } 
+
         catch (IOException e) 
         {
             e.printStackTrace();
         } 
+
     }
 
+
+
+
+
     // this function get Athletics competitor return a string of its full details
-    public String PrintAthleiticPlayerDetails(AthleticsCompetitor Acompetitor) {
+    public String PrintAthleiticPlayerDetails(AthleticsCompetitor Acompetitor) 
+    {
         AthleticsCompetitorView AView = new AthleticsCompetitorView();
         AthleticsCompetitorController AController = new AthleticsCompetitorController(Acompetitor, AView);
         String Fresults = AController.FullView();
         return Fresults;
 
     }
+
+
+
+
+
 
     // this function get Boxing competitor and return a string of its full details
     public String PrintBoxingPlayerDetails(BoxingCompetitor Bcompetitor) {
@@ -86,10 +111,16 @@ public class CompetitorList {
 
     }
 
+
+
+
+
     // printing the player summary statistics ( total, average, max, min)
-    public String PlayerSummaryStatictics(String name, double[] scores) {
+    public String PlayerSummaryStatictics(String name, double[] scores) 
+    {
         double total = 0;
-        for (double score : scores) {
+        for (double score : scores) 
+        {
             total += score;
         }
 
@@ -104,25 +135,35 @@ public class CompetitorList {
 
     }
 
+
+
+
     // Printing player Frequency Statistics scores how many times 0 and 1 .....
-    public String PlayerFrequencyStatistics(String name, double[] scores) {
+    public String PlayerFrequencyStatistics(String name, double[] scores) 
+    {
 
         String result = "";
         int[] ArrayofFrequencies = new int[6];
-        for (double score : scores) {
+        for (double score : scores) 
+        {
             int index = (int) score;
             ArrayofFrequencies[index]++;
         }
-        for (int i = 0; i <= 5; i++) {
+        for (int i = 0; i <= 5; i++) 
+        {
             result += "Frequency of Score " + i + " = " + ArrayofFrequencies[i] + "\n";
         }
         return result;
 
     }
 
-    // printing all players full details and summary statistics and Frequency Statistics
-    public String[] FinalReport(ArrayList<AthleticsCompetitor> APlayers, ArrayList<BoxingCompetitor> BPlayers) {
 
+
+
+
+    // printing all players full details and summary statistics and Frequency Statistics
+    public String[] FinalReport(ArrayList<AthleticsCompetitor> APlayers, ArrayList<BoxingCompetitor> BPlayers) 
+    {
         int count ; // calculating counts of players 
         if(APlayers != null && BPlayers != null) // printing Athletics and boxing players if both are not null 
         {
@@ -145,7 +186,8 @@ public class CompetitorList {
 
         if(APlayers!=null)  // filling Athletics players full details if not null
         {
-            for (AthleticsCompetitor A : APlayers) {
+            for (AthleticsCompetitor A : APlayers) 
+            {
 
                 Results[counter] = A.getFirstName() + "'s Final Report" + "\n";
                 String Fresults = competitorList.PrintAthleiticPlayerDetails(A);
@@ -166,7 +208,8 @@ public class CompetitorList {
 
         if(BPlayers != null)  // filling Boxing players full details if not null
         {
-            for (BoxingCompetitor B : BPlayers) {
+            for (BoxingCompetitor B : BPlayers) 
+            {
 
                 Results[counter] = B.getFirstName() + "'s Final Report" + "\n";
                 String Fresults = competitorList.PrintBoxingPlayerDetails(B);
@@ -188,8 +231,12 @@ public class CompetitorList {
 
     }
 
+
+
+
     // filling text file with players full details 
-    public void PrintFinalReport(ArrayList<AthleticsCompetitor> APlayers, ArrayList<BoxingCompetitor> BPlayers) {
+    public void PrintFinalReport(ArrayList<AthleticsCompetitor> APlayers, ArrayList<BoxingCompetitor> BPlayers) 
+    {
         String AllFileLocation = "FinalReport.txt";
         
 
@@ -208,6 +255,9 @@ public class CompetitorList {
         }
 
     }
+
+
+
 
     // filling athletics text file with athletics players final report 
     public void PrintAthleticsFinalReport(ArrayList<AthleticsCompetitor> APlayers)
@@ -229,6 +279,9 @@ public class CompetitorList {
 
 
     }
+
+
+
        // filling Boxing text file with athletics players final report 
      public void PrintBoxingFinalReport(ArrayList<BoxingCompetitor> BPlayers)
     {
@@ -251,8 +304,10 @@ public class CompetitorList {
     }
 
 
+
+
     // Searching for Athletic competitor by ID
-    public AthleticsCompetitor SearchForAthleticCompetitor(int ID)
+    public AthleticsCompetitor SearchForAthleticCompetitor(int ID )
     {
         AthleticsCompetitor A = null;
         for(AthleticsCompetitor AC : APlayers )
@@ -266,12 +321,15 @@ public class CompetitorList {
     }
 
 
+
+
     // Searching For Boxing competitor by ID
-     public BoxingCompetitor SearchForBoxingCompetitor(int ID)
+     public BoxingCompetitor SearchForBoxingCompetitor(int ID )
     {
         BoxingCompetitor B = null;
         for(BoxingCompetitor BC : BPlayers )
         {
+            System.out.println(BC.getIDnumber());
             if(BC.getIDnumber() == ID )
             {
                 B = BC;
@@ -280,17 +338,5 @@ public class CompetitorList {
         return B;
 
     }
-
-    // filling text file of athletics and Boxing competitors
-    public static void main(String[] args) {
-        CompetitorList competitorList = new CompetitorList();
-        String BcsvFile = "Boxing.csv";
-        String AcsvFile = "Athletics.csv";
-        competitorList.readCompetitorsFromFile(AcsvFile);
-        competitorList.readCompetitorsFromFile(BcsvFile);
-        competitorList.PrintAthleticsFinalReport(competitorList.APlayers);
-        competitorList.PrintBoxingFinalReport(competitorList.BPlayers);
-    }
-
 }
 

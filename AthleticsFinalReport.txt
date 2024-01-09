@@ -1,19 +1,19 @@
-Ann 's Final Report
-Competitor number 0 , Name : Ann  Sthen
-Ann  Sthen is a Female and his Game Type : Athletics
+Ann's Final Report
+Competitor number 0 , Name : Ann sthen
+Ann sthen is a Female and his Game Type : Athletics
 Email : Ann@outlook
 Country : UK
-Ann  is a Beginner  Aged 23 and received scores : [ 4.0 5.0 4.0 3.0 2.0 2.0 ] 
+Ann is a Intermediate Aged 22 and received scores : [ 5.0 2.0 1.0 4.0 4.0 3.0 ] 
 Has an OverAllScore : 3.25
-Printing Ann  Summary Statistics : 
-Total Score = 20.0
-Average = 3.3333333333333335
+Printing Ann Summary Statistics : 
+Total Score = 19.0
+Average = 3.1666666666666665
 Maximum Score = 5.0
-Minimum Score = 2.0
-Printing Ann  Frequency Statistics : 
+Minimum Score = 1.0
+Printing Ann Frequency Statistics : 
 Frequency of Score 0 = 0
-Frequency of Score 1 = 0
-Frequency of Score 2 = 2
+Frequency of Score 1 = 1
+Frequency of Score 2 = 1
 Frequency of Score 3 = 1
 Frequency of Score 4 = 2
 Frequency of Score 5 = 1
@@ -38,27 +38,6 @@ Frequency of Score 2 = 1
 Frequency of Score 3 = 1
 Frequency of Score 4 = 1
 Frequency of Score 5 = 3
-
-
-Kaith's Final Report
-Competitor number 2 , Name : Kaith Clos
-Kaith Clos is a Female and his Game Type : Athletics
-Email : Kaith@outlook
-Country : UK
-Kaith is a Beginner  Aged 29 and received scores : [ 4.0 4.0 2.0 2.0 5.0 4.0 ] 
-Has an OverAllScore : 3.5
-Printing Kaith Summary Statistics : 
-Total Score = 21.0
-Average = 3.5
-Maximum Score = 5.0
-Minimum Score = 2.0
-Printing Kaith Frequency Statistics : 
-Frequency of Score 0 = 0
-Frequency of Score 1 = 0
-Frequency of Score 2 = 2
-Frequency of Score 3 = 0
-Frequency of Score 4 = 3
-Frequency of Score 5 = 1
 
 
 Rinon's Final Report

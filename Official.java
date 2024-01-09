@@ -9,12 +9,13 @@ import java.util.List;
 public class Official extends Staff
 {
 
-
     public Official(String FirstName , String SecondName , String Email , String Password)
     {
         super(FirstName ,  SecondName , Email , Password);
         
     }
+
+
 
     public void AddPlayer(String Email,String Country, int Age, String F_name, String L_name,
     String Level, String Gender , String Gametype)
@@ -71,12 +72,14 @@ public class Official extends Staff
     }
 
 
+
+
     public String RemovePlayer(int ID )
     {
         try {
         List<String> lines = new ArrayList<>();
         String csvfile = "";
-        AthleticsCompetitor A = getCompetitorList().SearchForAthleticCompetitor(ID);
+        AthleticsCompetitor A = getCompetitorList().SearchForAthleticCompetitor(ID );
         BoxingCompetitor B = getCompetitorList().SearchForBoxingCompetitor(ID);
         if(A != null)
         {
@@ -127,14 +130,16 @@ public class Official extends Staff
     }
 
 
+
+
     public String Amendplayer(int ID , String Email, String Country, int Age, String F_name, String L_name,
         String Level, String Gender , String GameType )
     {
         try {
         List<String> lines = new ArrayList<>();
         String csvfile = "";
-        AthleticsCompetitor A = getCompetitorList().SearchForAthleticCompetitor(ID);
-        BoxingCompetitor B = getCompetitorList().SearchForBoxingCompetitor(ID);
+        AthleticsCompetitor A = getCompetitorList().SearchForAthleticCompetitor(ID );
+        BoxingCompetitor B = getCompetitorList().SearchForBoxingCompetitor(ID );
         if(A != null)
         {
             csvfile = "Athletics.csv";
@@ -190,21 +195,6 @@ public class Official extends Staff
     }
     return "Player with ID : " + ID + " Has been Edited";
 }
-
-
-   
-      
-    
-
-
-    public static void main(String[] args)
-    {
-        Official f = new Official("Ahmed", "Mohamed", "ahmed@gmail", "5555");
-        String R = f.Amendplayer(0 , "Ann@outlook", "UK" , 22 ,"Ann", "sthen", "Intermediate", "Female","Athletics");
-        System.out.println(R);
-        //f.AddPlayer("mohamed@outlook", "Egypt", 23, "Mohamed", "Khaled", "Intermediate", "Male", "Boxing");
-        //f.FillScores(20,"Boxing", Score);
-    }
     
 }
     
